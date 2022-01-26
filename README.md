@@ -1,7 +1,7 @@
 # Hostel-Management-MVC
 Final Mini Project CSC584
 
-Progress
+#Progress
 - Homepage (done)
 - Login Student (done)
 - Login Staff (ongoing)
@@ -15,5 +15,13 @@ Progress
   - Manage Profile (ongoing)
 - Menu Staff (ongoing)
 
-Bug Found
+#Bug Found
 - X
+
+#How to install
+Import Database
+  1.Create database with name 'hostelmanagement'
+  2.Import database 'hostelmanagement.sql'
+Import Project into Eclipse
+  1.Import file as WAR File
+    (File-import-web-WAR File)

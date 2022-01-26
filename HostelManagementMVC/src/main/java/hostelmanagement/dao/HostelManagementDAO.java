@@ -79,7 +79,7 @@ public class HostelManagementDAO {
 		}
 		return collegeApplication;
 	}
-	
+
 	//Get College by Student Number
 	public static Object getCollegeByStu_no(int stu_no) {
 		College college = new College();
@@ -89,11 +89,11 @@ public class HostelManagementDAO {
 			//call getConnection()
 			con = ConnectionManager.getConnection();
 			System.out.println("Database connected!");
-			
+
 			//create statement
 			ps = con.prepareStatement("SELECT * FROM college_application WHERE stu_no = ?");
 			ps.setInt(1, stu_no);
-			
+
 			//execute query
 			rs = ps.executeQuery();
 
@@ -102,14 +102,14 @@ public class HostelManagementDAO {
 				//collegeApplication.setColl_no(rs.getString("coll_no"));
 				coll_no=rs.getString("coll_no");
 			}
-			
+
 			//create statement
 			ps = con.prepareStatement("SELECT * FROM college WHERE coll_no = ?");
 			ps.setString(1, coll_no);
-			
+
 			//execute query
 			rs = ps.executeQuery();
-			
+
 			if(rs.next()) {
 				college.setColl_no(rs.getString("coll_no"));
 				college.setColl_name(rs.getString("coll_name"));
@@ -127,7 +127,7 @@ public class HostelManagementDAO {
 		}
 		return college;
 	}
-	
+
 
 	//Get College List By Student Number (Availability,Gender)
 	public static List<College> getCollegeListByStu_no(int stu_no) {
@@ -163,7 +163,7 @@ public class HostelManagementDAO {
 					System.out.println("Successful retrieve data!");
 				}
 			}
-			
+
 			else {
 				//create statement
 				Statement stmt = con.createStatement();
@@ -178,7 +178,7 @@ public class HostelManagementDAO {
 					System.out.println("Successful retrieve data!");
 				}
 			}
-			
+
 			//close connection
 			con.close();
 			System.out.println("Connection closed!");
@@ -192,7 +192,7 @@ public class HostelManagementDAO {
 
 	//Add college application
 	public void addCollegeApplication(CollegeApplication collap, Student student, College coll) {
-		
+
 		java.util.Date utilDate = collap.getCollap_date();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		String collap_session = collap.getCollap_session();
@@ -201,7 +201,7 @@ public class HostelManagementDAO {
 		stf_no = 101;
 		String coll_no = coll.getColl_no();
 		String coll_status = "Unavailable";
-		
+
 		try {
 			//Call getConnection()
 			con = ConnectionManager.getConnection();
@@ -219,17 +219,17 @@ public class HostelManagementDAO {
 			//Execute Query
 			ps.executeUpdate();
 			System.out.println("College Application Inserted!");
-			
+
 			//To set college status from available to unavailable
 			//Create Statement
 			ps = con.prepareStatement("UPDATE `college` SET `coll_status`=? WHERE `coll_no`=?");
 			ps.setString(1, coll_status);
 			ps.setString(2, coll_no);
-			
+
 			//Execute Query
 			ps.executeUpdate();
 			System.out.println("College Status Updated!");
-			
+
 			//Close Connection
 			con.close();
 
@@ -247,7 +247,7 @@ public class HostelManagementDAO {
 		String comp_description = comp.getComp_description();
 		String comp_status = "Processing";
 		stu_no = student.getStu_no();
-		
+
 		try {
 			//Call getConnection()
 			con = ConnectionManager.getConnection();
@@ -255,27 +255,16 @@ public class HostelManagementDAO {
 			//To insert new college application
 			//Create Statement
 			ps = con.prepareStatement("INSERT INTO `complaint`(`comp_type`, `comp_date`, `comp_description`, `comp_status`, `stu_no`) VALUES (?,?,?,?,?)");
-			ps.setDate(1, sqlDate);
-			ps.setString(2, collap_session);
-			ps.setString(3, collap_status);
-			ps.setInt(4, stu_no);
-			ps.setInt(5, stf_no);
-			ps.setString(6, coll_no);
+			ps.setString(1, comp_type);
+			ps.setDate(2, sqlDate);
+			ps.setString(3,comp_description);
+			ps.setString(4,comp_status);
+			ps.setInt(5, stu_no);
 
 			//Execute Query
 			ps.executeUpdate();
 			System.out.println("College Application Inserted!");
-			
-			//To set college status from available to unavailable
-			//Create Statement
-			ps = con.prepareStatement("UPDATE `college` SET `coll_status`=? WHERE `coll_no`=?");
-			ps.setString(1, coll_status);
-			ps.setString(2, coll_no);
-			
-			//Execute Query
-			ps.executeUpdate();
-			System.out.println("College Status Updated!");
-			
+
 			//Close Connection
 			con.close();
 
@@ -284,5 +273,137 @@ public class HostelManagementDAO {
 		}
 	}
 
-	
+	//Get list of Complaint by student number
+	public static List<Complaint> getListComplaintByStu_no(int stu_no) {
+		List<Complaint> complaints = new ArrayList<Complaint>();
+
+		try {
+			//call getConnection()
+			con = ConnectionManager.getConnection();
+			System.out.println("Database connected!");
+
+			//create statement
+			ps = con.prepareStatement("SELECT * FROM complaint WHERE stu_no = ?");
+			ps.setInt(1, stu_no);
+
+			//execute query
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Complaint comp = new Complaint();
+				comp.setComp_no(Integer.parseInt(rs.getString("comp_no")));
+				comp.setComp_type(rs.getString("comp_type"));
+				comp.setComp_date(rs.getDate("comp_date"));
+				comp.setComp_description(rs.getString("comp_description"));
+				comp.setComp_status(rs.getString("comp_status"));
+
+				complaints.add(comp);
+				System.out.println("Successful retrieve data!");
+			}
+
+			//close connection
+			con.close();
+			System.out.println("Connection closed!");
+
+		}catch(SQLException e) {
+			//System.out.println(e);
+			e.printStackTrace();
+		}
+		return complaints;
+	}
+
+	//STUDENT COMPLAINT
+	//GET COMPLAINT BY COMPLAINT NUMBER 
+	public static Object getComplaintByComp_no(int comp_no) {
+
+		Complaint complaint = new Complaint();
+
+		try {
+			//CONNECT TO DB
+			con = ConnectionManager.getConnection();
+			System.out.println("Database connected!");
+
+			//CREATE STATEMENT
+			ps = con.prepareStatement("SELECT * FROM complaint WHERE comp_no = ?");
+			ps.setInt(1, comp_no);
+
+			//EXECUTE QUERY
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				complaint.setComp_no(rs.getInt("comp_no"));
+				complaint.setComp_type(rs.getString("comp_type"));
+				complaint.setComp_description(rs.getString("comp_description"));
+				System.out.println("Successful retrieve data!");
+			}
+
+			//CLOSE CONNECTION
+			con.close();
+			System.out.println("Connection closed!");
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return complaint;
+	}
+	//END OF COMPLAINT BY COMPLAINT NUMBER 
+
+	//UPDATE COMPLAINT
+	public void updateComplaint(Complaint comp, Student student) {
+
+		java.util.Date utilDate = comp.getComp_date();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		String comp_description = comp.getComp_description();
+		int comp_no = comp.getComp_no();
+		stu_no = student.getStu_no();
+
+		try {
+			//CONNECT TO DB
+			con = ConnectionManager.getConnection();
+			System.out.println("Database connected!");
+
+			//CREATE STATEMENT
+			ps = con.prepareStatement("UPDATE complaint SET comp_date=?, comp_description=? WHERE comp_no=? AND stu_no=?");
+			ps.setDate(1, sqlDate);
+			ps.setString(2, comp_description);
+			ps.setInt(3, comp_no);
+			ps.setInt(4, stu_no);
+			System.out.println("Date"+sqlDate);
+			System.out.println(comp_no);
+			System.out.println(comp_description);
+			System.out.println(stu_no);
+			//EXECUTE QUERY
+			ps.executeUpdate();
+			System.out.println("Successful Update data!");
+
+			//CLOSE CONNECTION
+			con.close();
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//END OF UPDATE COMPLAINT
+
+	//DELETE COMPLAINT BY COMPLAINT NUMBER
+	public void deleteComplaintByComp_no(int comp_no) {
+		try {
+			//CONNECT TO DB
+			con = ConnectionManager.getConnection();
+
+			//CREATE STATEMENT
+			ps = con.prepareStatement("DELETE FROM complaint WHERE comp_no = ?");
+			ps.setInt(1, comp_no);
+
+			//EXECUTE QUERY
+			ps.executeUpdate();
+
+			//CLOSE CONNECTION
+			con.close();
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//END OF DELETE COMPLAINT BY COMPLAINT NUMBER
+
 }

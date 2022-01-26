@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.Date;
 
 import hostelmanagement.db.ConnectionManager;
-import hostelmanagement.model.CollegeApplication;
 import user.model.Student;
 
 public class UserDAO {
@@ -109,5 +108,4 @@ public class UserDAO {
 			}
 		return student;
 	}
-
 }

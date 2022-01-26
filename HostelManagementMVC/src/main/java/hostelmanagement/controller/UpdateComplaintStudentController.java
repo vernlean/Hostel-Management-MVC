@@ -18,17 +18,17 @@ import user.dao.UserDAO;
 import user.model.Student;
 
 /**
- * Servlet implementation class AddComplaintStudentController
+ * Servlet implementation class UpdateComplaintStudentController
  */
-@WebServlet("/AddComplaintStudentController")
-public class AddComplaintStudentController extends HttpServlet {
+@WebServlet("/UpdateComplaintStudentController")
+public class UpdateComplaintStudentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDAO dao;
 	private HostelManagementDAO dao2;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddComplaintStudentController() {
+    public UpdateComplaintStudentController() {
         super();
         dao = new UserDAO();
         dao2 = new HostelManagementDAO();
@@ -41,8 +41,10 @@ public class AddComplaintStudentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int stu_no = Integer.parseInt(request.getParameter("stu_no"));
+		int comp_no = Integer.parseInt(request.getParameter("comp_no"));
 		request.setAttribute("student", UserDAO.getStudentByStu_no(stu_no));
-		RequestDispatcher view = request.getRequestDispatcher("student/add_complaint.jsp");
+		request.setAttribute("complaint", HostelManagementDAO.getComplaintByComp_no(comp_no));
+		RequestDispatcher view = request.getRequestDispatcher("student/update_complaint.jsp");
 		view.forward(request, response);
 	}
 
@@ -50,22 +52,23 @@ public class AddComplaintStudentController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		Complaint comp = new Complaint();
 		Student student = new Student();
+		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date parsedDate = format.parse(request.getParameter("comp_date"));
 			comp.setComp_date(parsedDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		comp.setComp_type(request.getParameter("comp_type"));
+		comp.setComp_no(Integer.parseInt(request.getParameter("comp_no")));
 		comp.setComp_description(request.getParameter("comp_desc"));
 		student.setStu_no(Integer.parseInt(request.getParameter("stu_no")));
-		//add to db
-		dao2.addComplaint(comp,student);
+		
+		dao2.updateComplaint(comp,student);
+		
 		//FORWARD TO COMPLAINT STATUS
 		request.setAttribute("student", UserDAO.getStudentByStu_no(student.getStu_no()));
 		request.setAttribute("complaint", HostelManagementDAO.getListComplaintByStu_no(student.getStu_no()));

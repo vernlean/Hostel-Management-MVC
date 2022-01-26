@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -74,106 +74,122 @@
 			</button>
 
 		</div>
-
-
 		<!--  Content -->
-		<div class="backg">
+		<div class="backg overflow-scroll">
 			<div class="card">
 				<div class="bg-soft-primary">
 					<div class="card-body">
 						<h4 class="card-title">COMPLAINT</h4>
 						<ul class="nav nav-pills navtab-bg nav-justified">
 							<li class="nav-item"><a href="AddComplaintStudentController?stu_no=${student.stu_no}"
-								data-toggle="tab" aria-expanded="true" class="nav-link active"
+								data-toggle="tab" aria-expanded="true" class="nav-link"
 								style="border-radius: 15px;">MAKE COMPLAINT</a></li>
 							<li class="nav-item"><a href="ComplaintStatusStudentController?stu_no=${student.stu_no}"
-								data-toggle="tab" aria-expanded="false" class="nav-link"
+								data-toggle="tab" aria-expanded="false" class="nav-link active"
 								style="border-radius: 15px;">STATUS</a></li>
 						</ul>
 						<!--start div table   -->
-						<form action="AddComplaintStudentController?stu_no=${student.stu_no}" method="post">
-							<div class="table-responsive mt-4">
-								<table class="table table-centered table-nowrap">
-									<tbody>
-										<tr>
-											<td style="width: 20%">
-												<p class="mb-0">MATRIX NO</p>
-											</td>
-											<td style="width: 30%">
-												<h5 class="mb-0">${student.stu_no}</h5>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">NAME</p>
-											</td>
-											<td>
-												<h5 class="mb-0">${student.stu_name}</h5>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">IC NO</p>
-											</td>
-											<td>
-												<h5 class="mb-0">${student.stu_ic}</h5>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">COMPLAINT TYPE</p>
-											</td>
-											<td><select name="comp_type"
-												style="padding: 0 5px; border-radius: 5px;">
-													<option value="Electrical">ELECTRICAL</option>
-													<option value="Plumbing">PLUMBING</option>
-													<option value="Mechanical">MECHANICAL</option>
-													<option value="Telecomunication">TELECOMUNICATION</option>
-													<option value="Civil Landscape">CIVIL LANDSCAPE</option>
-													<option value="Infrastructure">INFRASTRUCTURE</option>
-											</select></td>
-										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">COMPLAINT DATE</p>
-											</td>
-											<td>
-												<input id="currentDate" type="date" name="comp_date" readonly />
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">COMPLAINT DESCRIPTION</p>
-											</td>
-											<td><input type="text" name="comp_desc"
-												style="padding: 0 5px; border-radius: 5px;" size="60"
-												placeholder="Description about problem and place if any.">
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div
-									style="display: flex; justify-content: center; align-items: center;">
-									<button type="submit" class="btn btn-primary"
-										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">APPLY</button>
-									<button type="reset" class="btn btn-secondary"
-										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">RESET</button>
-								</div>
-							</div>
-						</form>
+						<!--  STUDENT INFO  -->
+						<div class="table-responsive mt-4">
+							<table class="table table-centered table-nowrap">
+								<tbody>
+									<tr>
+										<td style="width: 20%">
+											<p class="mb-0">MATRIX NO</p>
+										</td>
+										<td style="width: 30%">
+											<h5 class="mb-0">${student.stu_no}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">NAME</p>
+										</td>
+										<td>
+											<h5 class="mb-0">${student.stu_name}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">IC NO</p>
+										</td>
+										<td>
+											<h5 class="mb-0">${student.stu_ic}</h5>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--  END OF STUDENT INFO  -->
+							<!--  LIST OF COMPLAINT  -->
+							<c:set var="count" value="1" scope="page" />
+							<c:forEach items="${complaint}" var="comp">
+								
+								<h4 class="card-title">COMPLAINT ${count}</h4>
+							<table class="table table-centered table-nowrap">
+								<tbody>
+									<tr>
+										<td style="width: 20%">
+											<p class="mb-0">COMPLAINT NO</p>
+										</td>
+										<td style="width: 30%">
+											<h5 class="mb-0">${comp.comp_no}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">COMPLAINT TYPE</p>
+										</td>
+										<td>
+											<h5 class="mb-0">${comp.comp_type}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">COMPLAINT DATE</p>
+										</td>
+										<td>
+											<h5 class="mb-0">${comp.comp_date}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">COMPLAINT DESCRIPTION</p>
+										</td>
+										<td>
+											<h5 class="mb-0">${comp.comp_description}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">COMPLAINT STATUS</p>
+										</td>
+										<td>
+											<h5 class="mb-0">${comp.comp_status}</h5>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">ACTION</p>
+										</td>
+										<td>
+											<h5 class="mb-0">
+											<button type="button" class="btn btn-primary btn-sm"
+											onclick="document.location='UpdateComplaintStudentController?stu_no=${student.stu_no}&comp_no=${comp.comp_no}'">Update</button>
+											<button type="button" class="btn btn-danger btn-sm"
+											onclick="document.location='DeleteComplaintStudentController?stu_no=${student.stu_no}&comp_no=${comp.comp_no}'">Delete</button>
+											</h5>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+							</c:forEach>
+							<!-- END OF LIST OF COMPLAINT -->
+						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</main>
-	<script>
-		//Date purpose
-		var date = new Date();
-		var currentDate = date.toISOString().slice(0, 10);
-		var currentTime = date.getHours() + ':' + date.getMinutes();
-		document.getElementById('currentDate').value = currentDate;
-	</script>
-
 </body>
 </html>

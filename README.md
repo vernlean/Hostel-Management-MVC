@@ -20,8 +20,8 @@ Final Mini Project CSC584
 
 #How to install
 Import Database
-  1.Create database with name 'hostelmanagement'
-  2.Import database 'hostelmanagement.sql'
+  -1.Create database with name 'hostelmanagement'
+  -Import database 'hostelmanagement.sql'
 Import Project into Eclipse
-  1.Import file as WAR File
+  -Import file as WAR File
     (File-import-web-WAR File)

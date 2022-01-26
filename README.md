@@ -11,7 +11,9 @@ Final Mini Project CSC584
     - Status (done)
   - Complaint
     - Make Complaint (done)
-    - Status (ongoing)
+    - Status (done)
+      - Update (done)
+      - Delete (done)
   - Manage Profile (ongoing)
 - Menu Staff (ongoing)
 

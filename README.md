@@ -4,7 +4,7 @@ Final Mini Project CSC584
 #Progress
 - Homepage (done)
 - Login Student (done)
-- Login Staff (ongoing)
+- Login Staff (done)
 - Menu Student (done)
   - Hostel Application
     - Apply (done)
@@ -14,8 +14,13 @@ Final Mini Project CSC584
     - Status (done)
       - Update (done)
       - Delete (done)
-  - Manage Profile (ongoing)
-- Menu Staff (ongoing)
+  - Manage Profile (done)
+- Menu Staff (done)
+  - List Student (done)
+  - List College (ongoing)
+  - List College Application (ongoing)
+  - List Complaint (ongoing)
+  - Generate Report (ongoing)
 
 #Bug Found
 - X

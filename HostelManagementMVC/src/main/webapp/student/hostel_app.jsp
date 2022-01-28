@@ -67,7 +67,7 @@ if (session.getAttribute("currentSessionUser") == null)
 					class="nav-link text-white"> <i
 						class="bi bi-exclamation-square"></i> Complaint
 				</a></li>
-				<li class="nav-item"><a href="manage_profile_student.html"
+				<li class="nav-item"><a href="ManageProfileStudentController?stu_no=${student.stu_no}"
 					class="nav-link text-white"> <i class="bi bi-person-circle"></i>
 						Manage Profile
 				</a></li>
@@ -75,7 +75,7 @@ if (session.getAttribute("currentSessionUser") == null)
 			<hr>
 			<div style="margin: 5px 20px 5px 20px;">
 				<a style="vertical-align: baseline;"><img
-					src="https://github.com/mdo.png" alt="" width="32" height="32"
+					src="assets/images/user.png" alt="" width="32" height="32"
 					class="rounded-circle me-2"><strong>${student.stu_no}</strong></a>
 			</div>
 			<button onclick="document.location='LogoutController'" type="button"
@@ -197,8 +197,8 @@ if (session.getAttribute("currentSessionUser") == null)
 												<p class="mb-0">DATE</p>
 											</td>
 											<td>
-												<!-- <h5 class="mb-0" id="date"></h5> --> <input
-												id="currentDate" type="date" name="collap_date" readonly />
+												<!-- <h5 class="mb-0" id="date"></h5> --> 
+												<input id="currentDate" type="date" name="collap_date" readonly />
 											</td>
 										</tr>
 										<!-- If no record for college application -->
@@ -208,7 +208,7 @@ if (session.getAttribute("currentSessionUser") == null)
 													<p class="mb-0">SESSION</p>
 												</td>
 												<td><select name="collap_session"
-													style="padding: 0 50px; border-radius: 5px;">
+													style="padding: 0 50px; border-radius: 5px;" required>
 														<option value="SESSION 1 20/21">SESSION 1 20/21</option>
 														<option value="SESSION 2 20/21">SESSION 2 20/21</option>
 														<option value="SESSION 1 21/22">SESSION 1 21/22</option>
@@ -221,7 +221,7 @@ if (session.getAttribute("currentSessionUser") == null)
 														(Name-House-Room-Person)</p>
 												</td>
 												<td><select name="coll_no"
-													style="padding: 0 50px; border-radius: 5px;">
+													style="padding: 0 50px; border-radius: 5px;" required>
 														<c:forEach items="${college}" var="coll">
 															<option value="${coll.coll_no}">${coll.coll_no}</option>
 														</c:forEach>

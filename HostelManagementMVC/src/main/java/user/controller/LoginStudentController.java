@@ -21,24 +21,19 @@ import user.model.Student;
 @WebServlet("/LoginStudentController")
 public class LoginStudentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDAO dao;
-	private HostelManagementDAO dao2;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginStudentController() {
         super();
-        dao = new UserDAO();
-        dao2 = new HostelManagementDAO();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//
+
 		Student s = new Student();
 		s.setStu_no(Integer.parseInt(request.getParameter("stu_no")));
 		s.setStu_pass(request.getParameter("stu_pass"));
@@ -49,17 +44,14 @@ public class LoginStudentController extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("currentSessionUser", s.getStu_no());
 			request.setAttribute("student", UserDAO.getStudentByStu_no(s.getStu_no()));
-			//request.setAttribute("collegeApplication", null);
 			request.setAttribute("collegeApplication", HostelManagementDAO.getCollegeApplicationByStu_no(s.getStu_no()));
 			//forward to student page
-			//request.setAttribute("shawls", ShawlDAO.getAllShawls());
 			RequestDispatcher view = request.getRequestDispatcher("student/menu_student.jsp");
 			view.forward(request, response);
 		}
 		else 
 		{
 			JOptionPane.showMessageDialog(null, "Please enter a valid Student No & Password", "Error Occurred", JOptionPane.WARNING_MESSAGE);
-			//showMessageDialog(null, "This is even shorter");
 			response.sendRedirect("student/signin_student.jsp");
 		}
 	}

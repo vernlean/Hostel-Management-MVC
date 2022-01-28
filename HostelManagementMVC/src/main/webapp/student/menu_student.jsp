@@ -47,7 +47,7 @@ if(session.getAttribute("currentSessionUser")==null)
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <a href="StudentMenuController?stu_no=${student.stu_no}" class="nav-link active" aria-current="page">
           <i class="bi bi-house"></i> Home
         </a>
       </li>
@@ -62,14 +62,14 @@ if(session.getAttribute("currentSessionUser")==null)
         </a>
       </li>
       <li class="nav-item">
-        <a href="manage_profile_student.html" class="nav-link text-white">
+        <a href="ManageProfileStudentController?stu_no=${student.stu_no}" class="nav-link text-white">
           <i class="bi bi-person-circle"></i> Manage Profile
         </a>
       </li>
     </ul>
     <hr>
     <div style="margin:5px 20px 5px 20px;">
-      <a style="vertical-align: baseline;"><img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"><strong>${student.stu_no}</strong></a>
+      <a style="vertical-align: baseline;"><img src="assets/images/user.png" alt="" width="32" height="32" class="rounded-circle me-2"><strong>${student.stu_no}</strong></a>
     </div>
       <button onclick="document.location='LogoutController'" type="button" class="btn btn-danger" style="margin:10px;"><i class="bi bi-power" style="vertical-align: baseline; margin-right:10px;"></i> Logout</button>
   </div>

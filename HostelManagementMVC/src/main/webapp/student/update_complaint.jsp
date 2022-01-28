@@ -45,14 +45,17 @@
 			</a>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
-				<li class="nav-item"><a href="StudentMenuController?stu_no=${student.stu_no}"
+				<li class="nav-item"><a
+					href="StudentMenuController?stu_no=${student.stu_no}"
 					class="nav-link text-white"> <i class="bi bi-house"></i> Home
 				</a></li>
-				<li class="nav-item"><a href="CollegeApplicationStudentController?stu_no=${student.stu_no}"
+				<li class="nav-item"><a
+					href="CollegeApplicationStudentController?stu_no=${student.stu_no}"
 					class="nav-link text-white"> <i class="bi bi-box-arrow-right"></i>
 						Hostel Application
 				</a></li>
-				<li class="nav-item"><a href="AddComplaintStudentController?stu_no=${student.stu_no}"
+				<li class="nav-item"><a
+					href="AddComplaintStudentController?stu_no=${student.stu_no}"
 					class="nav-link active" aria-current="page"> <i
 						class="bi bi-exclamation-square"></i> Complaint
 				</a></li>
@@ -83,15 +86,15 @@
 					<div class="card-body">
 						<h4 class="card-title">COMPLAINT</h4>
 						<ul class="nav nav-pills navtab-bg nav-justified">
-							<li class="nav-item"><a href="AddComplaintStudentController?stu_no=${student.stu_no}"
+							<li class="nav-item"><a
+								href="UpdateComplaintStudentController?stu_no=${student.stu_no}&comp_no=${complaint.comp_no}"
 								data-toggle="tab" aria-expanded="true" class="nav-link active"
-								style="border-radius: 15px;">MAKE COMPLAINT</a></li>
-							<li class="nav-item"><a href="ComplaintStatusStudentController?stu_no=${student.stu_no}"
-								data-toggle="tab" aria-expanded="false" class="nav-link"
-								style="border-radius: 15px;">STATUS</a></li>
+								style="border-radius: 15px;">UPDATE COMPLAINT</a></li>
 						</ul>
 						<!--start div table   -->
-						<form action="AddComplaintStudentController?stu_no=${student.stu_no}" method="post">
+						<form
+							action="UpdateComplaintStudentController?stu_no=${student.stu_no}&comp_no=${complaint.comp_no}"
+							method="post">
 							<div class="table-responsive mt-4">
 								<table class="table table-centered table-nowrap">
 									<tbody>
@@ -120,26 +123,28 @@
 											</td>
 										</tr>
 										<tr>
+										<tr>
+											<td>
+												<p class="mb-0">COMPLAINT NO</p>
+											</td>
+											<td>
+												<h5 class="mb-0">${complaint.comp_no}</h5>
+											</td>
+										</tr>
+										<tr>
 											<td>
 												<p class="mb-0">COMPLAINT TYPE</p>
 											</td>
-											<td><select name="comp_type"
-												style="padding: 0 5px; border-radius: 5px;">
-													<option value="Electrical">ELECTRICAL</option>
-													<option value="Plumbing">PLUMBING</option>
-													<option value="Mechanical">MECHANICAL</option>
-													<option value="Telecomunication">TELECOMUNICATION</option>
-													<option value="Civil Landscape">CIVIL LANDSCAPE</option>
-													<option value="Infrastructure">INFRASTRUCTURE</option>
-											</select></td>
+											<td>
+												<h5 class="mb-0">${complaint.comp_type}</h5>
+											</td>
 										</tr>
 										<tr>
 											<td>
 												<p class="mb-0">COMPLAINT DATE</p>
 											</td>
-											<td>
-												<input id="currentDate" type="date" name="comp_date" readonly />
-											</td>
+											<td><input id="currentDate" type="date" name="comp_date"
+												readonly /></td>
 										</tr>
 										<tr>
 											<td>
@@ -147,15 +152,14 @@
 											</td>
 											<td><input type="text" name="comp_desc"
 												style="padding: 0 5px; border-radius: 5px;" size="60"
-												placeholder="Description about problem and place if any." required>
-											</td>
+												placeholder="${complaint.comp_description}"></td>
 										</tr>
 									</tbody>
 								</table>
 								<div
 									style="display: flex; justify-content: center; align-items: center;">
 									<button type="submit" class="btn btn-primary"
-										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">APPLY</button>
+										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">UPDATE</button>
 									<button type="reset" class="btn btn-secondary"
 										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">RESET</button>
 								</div>

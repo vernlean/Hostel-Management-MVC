@@ -9,21 +9,16 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.88.1">
-
 <title>Student Login</title>
-
 <!-- add icon link -->
 <link rel="icon" href="../assets/images/h_logo.svg" type="image/x-icon">
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
-
 <!-- Bootstrap core CSS -->
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- Bootstrap Icon -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -39,11 +34,10 @@
 	}
 }
 </style>
-
-
 <!-- Custom styles for this template -->
 <link href="../assets/css/signin.css" rel="stylesheet">
 </head>
+
 <body class="text-center">
 	<div
 		class="modal modal-signin position-static d-block bg-secondary py-5"

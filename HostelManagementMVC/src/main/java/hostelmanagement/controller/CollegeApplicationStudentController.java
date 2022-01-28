@@ -25,14 +25,12 @@ import user.model.Student;
 @WebServlet("/CollegeApplicationStudentController")
 public class CollegeApplicationStudentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDAO dao;
 	private HostelManagementDAO dao2;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CollegeApplicationStudentController() {
         super();
-        dao = new UserDAO();
         dao2 = new HostelManagementDAO();
         // TODO Auto-generated constructor stub
     }

@@ -54,7 +54,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content rounded-5 shadow">
 				<main class="form-signin">
-					<form action="LoginStaffController" method="post">
+					<form action="../LoginStaffController" method="post">
 						<img class="mb-4" src="../assets/images/hostel_logo.svg" alt=""
 							width="300" height="100">
 						<ul class="nav nav-pills navtab-bg nav-justified">

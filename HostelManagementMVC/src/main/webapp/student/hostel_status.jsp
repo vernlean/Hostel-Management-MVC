@@ -66,7 +66,7 @@ if (session.getAttribute("currentSessionUser") == null)
 					class="nav-link text-white"> <i
 						class="bi bi-exclamation-square"></i> Complaint
 				</a></li>
-				<li class="nav-item"><a href="manage_profile_student.html"
+				<li class="nav-item"><a href="ManageProfileStudentController?stu_no=${student.stu_no}"
 					class="nav-link text-white"> <i class="bi bi-person-circle"></i>
 						Manage Profile
 				</a></li>
@@ -74,7 +74,7 @@ if (session.getAttribute("currentSessionUser") == null)
 			<hr>
 			<div style="margin: 5px 20px 5px 20px;">
 				<a style="vertical-align: baseline;"><img
-					src="https://github.com/mdo.png" alt="" width="32" height="32"
+					src="assets/images/user.png" alt="" width="32" height="32"
 					class="rounded-circle me-2"><strong>${student.stu_no}</strong></a>
 			</div>
 			<button onclick="document.location='index.html'" type="button"

@@ -12,7 +12,7 @@ if (session.getAttribute("currentSessionUser") == null)
 	response.sendRedirect("index.html");
 %>
 <%int id = (Integer) session.getAttribute("currentSessionUser");%>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -46,8 +46,10 @@ if (session.getAttribute("currentSessionUser") == null)
 <body style="height: 100%;">
 
 	<main>
+		<h1 class="visually-hidden">Sidebars examples</h1>
+
 		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-			style="width: 15%; min-width: 200px; height: 100%;">
+			style="width: 15%; min-width: 200px; overflow: hidden; height: 100%;">
 			<a href="StudentMenuController"
 				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
 				<span class="fs-4">Student Menu</span>
@@ -60,11 +62,12 @@ if (session.getAttribute("currentSessionUser") == null)
 				</a></li>
 				<li class="nav-item"><a
 					href="CollegeApplicationStudentController"
-					class="nav-link active" aria-current="page"> <i
-						class="bi bi-box-arrow-right"></i> Hostel Application
+					class="nav-link text-white"> <i class="bi bi-box-arrow-right"></i>
+						Hostel Application
 				</a></li>
-				<li class="nav-item"><a href="AddComplaintStudentController"
-					class="nav-link text-white"> <i
+				<li class="nav-item"><a
+					href="AddComplaintStudentController"
+					class="nav-link active" aria-current="page"> <i
 						class="bi bi-exclamation-square"></i> Complaint
 				</a></li>
 				<li class="nav-item"><a href="ManageProfileStudentController"
@@ -76,7 +79,7 @@ if (session.getAttribute("currentSessionUser") == null)
 			<div style="margin: 5px 20px 5px 20px;">
 				<a style="vertical-align: baseline;"><img
 					src="assets/images/user.png" alt="" width="32" height="32"
-					class="rounded-circle me-2"><strong><%=id %></strong></a>
+					class="rounded-circle me-2"><strong><%=id%></strong></a>
 			</div>
 			<button onclick="document.location='LogoutController'" type="button"
 				class="btn btn-danger" style="margin: 10px;">
@@ -85,25 +88,24 @@ if (session.getAttribute("currentSessionUser") == null)
 			</button>
 
 		</div>
-
-
 		<!--  Content -->
 		<div class="backg overflow-scroll">
 			<div class="card">
 				<div class="bg-soft-primary">
 					<div class="card-body">
-						<h4 class="card-title">HOSTEL APPLICATION</h4>
+						<h4 class="card-title">COMPLAINT</h4>
 						<ul class="nav nav-pills navtab-bg nav-justified">
 							<li class="nav-item"><a
-								href="CollegeApplicationStudentController"
+								href="AddComplaintStudentController"
 								data-toggle="tab" aria-expanded="true" class="nav-link"
-								style="border-radius: 15px;">APPLY</a></li>
+								style="border-radius: 15px;">MAKE COMPLAINT</a></li>
 							<li class="nav-item"><a
-								href="CollegeApplicationStatusStudentController"
+								href="ComplaintStatusStudentController"
 								data-toggle="tab" aria-expanded="false" class="nav-link active"
 								style="border-radius: 15px;">STATUS</a></li>
 						</ul>
 						<!--start div table   -->
+						<!--  STUDENT INFO  -->
 						<div class="table-responsive mt-4">
 							<table class="table table-centered table-nowrap">
 								<tbody>
@@ -131,117 +133,91 @@ if (session.getAttribute("currentSessionUser") == null)
 											<h5 class="mb-0">${student.stu_ic}</h5>
 										</td>
 									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">PROGRAMME</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${student.stu_program}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">PART</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${student.stu_part}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">EMAIL</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${student.stu_email}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">PHONE NO</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${student.stu_phoneno}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">APPLY DATE</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${collegeApplication.collap_date}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">SESSION</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${collegeApplication.collap_session}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">APPLICATION NO</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${collegeApplication.collap_no}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">APPLICATION STATUS</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${collegeApplication.collap_status}</h5>
-										</td>
-									</tr>
 								</tbody>
 							</table>
-						</div>
-						<h4 class="card-title">HOSTEL INFORMATION</h4>
-						<div class="table-responsive mt-4">
-							<table class="table table-centered table-nowrap">
-								<tbody>
-									<tr>
-										<td style="width: 20%">
-											<p class="mb-0">COLLEGE NO</p>
-										</td>
-										<td style="width: 30%">
-											<h5 class="mb-0">${college.coll_no}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">COLLEGE NAME</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${college.coll_name}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">COLLEGE FLOOR</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${college.coll_floor}</h5>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<p class="mb-0">COLLEGE ROOM</p>
-										</td>
-										<td>
-											<h5 class="mb-0">${college.coll_room}</h5>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+							<!--  END OF STUDENT INFO  -->
+							<!--  LIST OF COMPLAINT  -->
+							<c:set var="count" value="1" scope="page" />
+							<c:forEach items="${complaint}" var="comp" varStatus="cm">
+
+								<h4 class="card-title">COMPLAINT ${count}</h4>
+								<table class="table table-centered table-nowrap">
+									<tbody>
+										<tr>
+											<td style="width: 20%">
+												<p class="mb-0">COMPLAINT NO</p>
+											</td>
+											<td style="width: 30%">
+												<h5 class="mb-0">${comp.comp_no}</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p class="mb-0">COMPLAINT TYPE</p>
+											</td>
+											<td>
+												<h5 class="mb-0">${comp.comp_type}</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p class="mb-0">COMPLAINT DATE</p>
+											</td>
+											<td>
+												<h5 class="mb-0">${comp.comp_date}</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p class="mb-0">COMPLAINT DESCRIPTION</p>
+											</td>
+											<td>
+												<h5 class="mb-0">${comp.comp_description}</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p class="mb-0">COMPLAINT STATUS</p>
+											</td>
+											<td>
+												<h5 class="mb-0">${comp.comp_status}</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p class="mb-0">ACTION</p>
+											</td>
+											<td>
+												<h5 class="mb-0">
+													<button type="button" class="btn btn-primary btn-sm" onclick="document.location='UpdateComplaintStudentController?comp_no=${comp.comp_no}'">Update</button>
+													<input type="hidden" id="comp_no-${cm.index}" value="<c:out value="${comp.comp_no}"/>">
+													<button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('${cm.index}')">Delete</button>
+												</h5>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<c:set var="count" value="${count + 1}" scope="page" />
+							</c:forEach>
+							<!-- END OF LIST OF COMPLAINT -->
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</main>
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<script>
+		function confirmDelete(index) {
+			var comp_no = $("#comp_no-" + index).val();
+			var r = confirm("Are you sure want to delete feedback " + comp_no + "?");
+			if (r == true) {
+				location.href = 'DeleteComplaintStudentController?comp_no='+ comp_no;
+				alert("Feedback deleted!");
+			} else {
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>

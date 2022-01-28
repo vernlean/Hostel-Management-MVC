@@ -12,7 +12,7 @@ if (session.getAttribute("currentSessionUser") == null)
 	response.sendRedirect("index.html");
 %>
 <%int id = (Integer) session.getAttribute("currentSessionUser");%>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -46,6 +46,7 @@ if (session.getAttribute("currentSessionUser") == null)
 <body style="height: 100%;">
 
 	<main>
+		<h1 class="visually-hidden">Sidebars examples</h1>
 
 		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
 			style="width: 15%; min-width: 200px; overflow: hidden; height: 100%;">
@@ -61,11 +62,12 @@ if (session.getAttribute("currentSessionUser") == null)
 				</a></li>
 				<li class="nav-item"><a
 					href="CollegeApplicationStudentController"
-					class="nav-link active" aria-current="page"> <i
-						class="bi bi-box-arrow-right"></i> Hostel Application
+					class="nav-link text-white"> <i class="bi bi-box-arrow-right"></i>
+						Hostel Application
 				</a></li>
-				<li class="nav-item"><a href="AddComplaintStudentController"
-					class="nav-link text-white"> <i
+				<li class="nav-item"><a
+					href="AddComplaintStudentController"
+					class="nav-link active" aria-current="page"> <i
 						class="bi bi-exclamation-square"></i> Complaint
 				</a></li>
 				<li class="nav-item"><a href="ManageProfileStudentController"
@@ -93,38 +95,16 @@ if (session.getAttribute("currentSessionUser") == null)
 			<div class="card">
 				<div class="bg-soft-primary">
 					<div class="card-body">
-						<h4 class="card-title">HOSTEL APPLICATION</h4>
-						<!-- If no record for college application -->
-						<c:if test="${empty collegeApplication}">
-							<ul class="nav nav-pills navtab-bg nav-justified">
-								<li class="nav-item"><a
-									href="CollegeApplicationStudentController"
-									data-toggle="tab" aria-expanded="true" class="nav-link active"
-									style="border-radius: 15px;">APPLY</a></li>
-								<li class="nav-item"><a
-									href="#"
-									data-toggle="tab" aria-expanded="false" class="nav-link"
-									style="border-radius: 15px;">STATUS</a></li>
-							</ul>
-						</c:if>
-						<!-- If record for college application exist -->
-						<c:if test="${not empty collegeApplication}">
-							<ul class="nav nav-pills navtab-bg nav-justified">
-								<li class="nav-item"><a
-									href="CollegeApplicationStudentController"
-									data-toggle="tab" aria-expanded="true" class="nav-link active"
-									style="border-radius: 15px;">APPLY</a></li>
-								<li class="nav-item"><a
-									href="CollegeApplicationStatusStudentController"
-									data-toggle="tab" aria-expanded="false" class="nav-link"
-									style="border-radius: 15px;">STATUS</a></li>
-							</ul>
-						</c:if>
-
-
-						<!--  start div table   -->
+						<h4 class="card-title">COMPLAINT</h4>
+						<ul class="nav nav-pills navtab-bg nav-justified">
+							<li class="nav-item"><a
+								href="UpdateComplaintStudentController?comp_no=${complaint.comp_no}"
+								data-toggle="tab" aria-expanded="true" class="nav-link active"
+								style="border-radius: 15px;">UPDATE COMPLAINT</a></li>
+						</ul>
+						<!--start div table   -->
 						<form
-							action="CollegeApplicationStudentController"
+							action="UpdateComplaintStudentController?comp_no=${complaint.comp_no}"
 							method="post">
 							<div class="table-responsive mt-4">
 								<table class="table table-centered table-nowrap">
@@ -154,106 +134,52 @@ if (session.getAttribute("currentSessionUser") == null)
 											</td>
 										</tr>
 										<tr>
+										<tr>
 											<td>
-												<p class="mb-0">GENDER</p>
+												<p class="mb-0">COMPLAINT NO</p>
 											</td>
 											<td>
-												<h5 class="mb-0">${student.stu_gender}</h5>
+												<h5 class="mb-0">${complaint.comp_no}</h5>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<p class="mb-0">PROGRAMME</p>
+												<p class="mb-0">COMPLAINT TYPE</p>
 											</td>
 											<td>
-												<h5 class="mb-0">${student.stu_program}</h5>
+												<h5 class="mb-0">${complaint.comp_type}</h5>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<p class="mb-0">PART</p>
+												<p class="mb-0">COMPLAINT DATE</p>
 											</td>
-											<td>
-												<h5 class="mb-0">${student.stu_part}</h5>
-											</td>
+											<td><input id="currentDate" type="date" name="comp_date"
+												readonly /></td>
 										</tr>
 										<tr>
 											<td>
-												<p class="mb-0">EMAIL</p>
+												<p class="mb-0">COMPLAINT DESCRIPTION</p>
 											</td>
-											<td>
-												<h5 class="mb-0">${student.stu_email}</h5>
-											</td>
+											<td><input type="text" name="comp_desc"
+												style="padding: 0 5px; border-radius: 5px;" size="60"
+												placeholder="${complaint.comp_description}"></td>
 										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">PHONE NO</p>
-											</td>
-											<td>
-												<h5 class="mb-0">${student.stu_phoneno}</h5>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<p class="mb-0">DATE</p>
-											</td>
-											<td>
-												<!-- <h5 class="mb-0" id="date"></h5> --> 
-												<input id="currentDate" type="date" name="collap_date" readonly />
-											</td>
-										</tr>
-										<!-- If no record for college application -->
-										<c:if test="${empty collegeApplication}">
-											<tr>
-												<td>
-													<p class="mb-0">SESSION</p>
-												</td>
-												<td><select name="collap_session"
-													style="padding: 0 50px; border-radius: 5px;" required>
-														<option value="SESSION 1 20/21">SESSION 1 20/21</option>
-														<option value="SESSION 2 20/21">SESSION 2 20/21</option>
-														<option value="SESSION 1 21/22">SESSION 1 21/22</option>
-														<option value="SESSION 2 21/22">SESSION 2 21/22</option>
-												</select></td>
-											</tr>
-											<tr>
-												<td>
-													<p class="mb-0">College Available
-														(Name-House-Room-Person)</p>
-												</td>
-												<td><select name="coll_no"
-													style="padding: 0 50px; border-radius: 5px;" required>
-														<c:forEach items="${college}" var="coll">
-															<option value="${coll.coll_no}">${coll.coll_no}</option>
-														</c:forEach>
-												</select></td>
-											</tr>
-											<tr align="center">
-												<td colspan="2">
-													<button type="submit" class="btn btn-primary"
-														style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">APPLY</button>
-													<button type="reset" class="btn btn-secondary"
-														style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">RESET</button>
-												</td>
-											</tr>
-										</c:if>
-										<c:if test="${not empty collegeApplication}">
-											<tr>
-												<td>
-													<p class="mb-0">HOSTEL APPLICATION STATUS</p>
-												</td>
-												<td>
-													<h5 class="mb-0">${collegeApplication.collap_status}</h5>
-												</td>
-											</tr>
-										</c:if>
 									</tbody>
 								</table>
+								<div
+									style="display: flex; justify-content: center; align-items: center;">
+									<button type="submit" class="btn btn-primary"
+										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">UPDATE</button>
+									<button type="reset" class="btn btn-secondary"
+										style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">RESET</button>
+								</div>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</main>
 	<script>
@@ -263,5 +189,6 @@ if (session.getAttribute("currentSessionUser") == null)
 		var currentTime = date.getHours() + ':' + date.getMinutes();
 		document.getElementById('currentDate').value = currentDate;
 	</script>
+
 </body>
 </html>

@@ -13,27 +13,37 @@ import hostelmanagement.dao.HostelManagementDAO;
 import user.dao.UserDAO;
 
 /**
- * Servlet implementation class StudentMenuController
+ * Servlet implementation class DeleteComplaintStudentController
  */
-@WebServlet("/StudentMenuController")
-public class StudentMenuController extends HttpServlet {
+@WebServlet("/DeleteComplaintStudentController")
+public class DeleteComplaintStudentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public StudentMenuController() {
-        super();
-    }
+	private HostelManagementDAO dao;
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public DeleteComplaintStudentController() {
+		super();
+		dao = new HostelManagementDAO();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		//SET VARIABLE
 		int stu_no = (int) request.getSession().getAttribute("currentSessionUser");
+		int comp_no = Integer.parseInt(request.getParameter("comp_no"));
+		
+		//DAO
+		dao.deleteComplaintByComp_no(comp_no);
+
+		//FORWARD TO COMPLAINT STATUS
 		request.setAttribute("student", UserDAO.getStudentByStu_no(stu_no));
-		request.setAttribute("collegeApplication", HostelManagementDAO.getCollegeApplicationByStu_no(stu_no));
-		RequestDispatcher view = request.getRequestDispatcher("student/menu_student.jsp");
+		request.setAttribute("complaint", HostelManagementDAO.getListComplaintByStu_no(stu_no));
+		RequestDispatcher view = request.getRequestDispatcher("student/complaint_status.jsp");
 		view.forward(request, response);
 	}
 }

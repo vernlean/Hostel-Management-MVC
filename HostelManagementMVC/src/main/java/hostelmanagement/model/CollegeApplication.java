@@ -55,5 +55,4 @@ public class CollegeApplication {
 		this.coll_no = coll_no;
 	}
 	
-	
 }

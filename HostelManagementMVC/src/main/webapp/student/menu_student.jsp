@@ -8,8 +8,8 @@ response.setHeader("Pragma","no-cache");
 response.setDateHeader("Expires",0);
 //get session and check if session null, go to login page
 if(session.getAttribute("currentSessionUser")==null)
-	response.sendRedirect("index.html");
- %>
+	response.sendRedirect("index.html");%>
+<%int id = (Integer) session.getAttribute("currentSessionUser");%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +19,7 @@ if(session.getAttribute("currentSessionUser")==null)
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
     <title>Student Menu</title>
-
+    
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sidebars/">
 
     <!-- add icon link -->
@@ -37,39 +37,39 @@ if(session.getAttribute("currentSessionUser")==null)
     <link href="assets/css/menu_student.css" rel="stylesheet">
     
   </head>
-  <body style="height:100%;">
-
+  
+<body style="height:100%;">
 <main>
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; min-width: 200px;  overflow: hidden; height: 100%;">
-    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <a href="StudentMenuController" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <span class="fs-4">Student Menu</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+        <a href="StudentMenuController" class="nav-link active" aria-current="page">
           <i class="bi bi-house"></i> Home
         </a>
       </li>
       <li class="nav-item">
-        <a href="CollegeApplicationStudentController?stu_no=${student.stu_no}" class="nav-link text-white">
+        <a href="CollegeApplicationStudentController" class="nav-link text-white">
           <i class="bi bi-box-arrow-right"></i> Hostel Application
         </a>
       </li>
       <li class="nav-item">
-        <a href="AddComplaintStudentController?stu_no=${student.stu_no}" class="nav-link text-white">
+        <a href="AddComplaintStudentController" class="nav-link text-white">
           <i class="bi bi-exclamation-square"></i> Complaint
         </a>
       </li>
       <li class="nav-item">
-        <a href="manage_profile_student.html" class="nav-link text-white">
+        <a href="ManageProfileStudentController" class="nav-link text-white">
           <i class="bi bi-person-circle"></i> Manage Profile
         </a>
       </li>
     </ul>
     <hr>
     <div style="margin:5px 20px 5px 20px;">
-      <a style="vertical-align: baseline;"><img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2"><strong>${student.stu_no}</strong></a>
+      <a style="vertical-align: baseline;"><img src="assets/images/user.png" alt="" width="32" height="32" class="rounded-circle me-2"><strong><%=id%></strong></a>
     </div>
       <button onclick="document.location='LogoutController'" type="button" class="btn btn-danger" style="margin:10px;"><i class="bi bi-power" style="vertical-align: baseline; margin-right:10px;"></i> Logout</button>
   </div>
@@ -180,7 +180,6 @@ if(session.getAttribute("currentSessionUser")==null)
                                 </td>
 							</tr>
 							</c:if>
-							
 						</tbody>
 					</table>
 				</div>

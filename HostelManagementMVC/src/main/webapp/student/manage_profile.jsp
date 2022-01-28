@@ -46,6 +46,7 @@ if (session.getAttribute("currentSessionUser") == null)
 <body style="height: 100%;">
 
 	<main>
+		<h1 class="visually-hidden">Sidebars examples</h1>
 
 		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
 			style="width: 15%; min-width: 200px; overflow: hidden; height: 100%;">
@@ -55,22 +56,20 @@ if (session.getAttribute("currentSessionUser") == null)
 			</a>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
-				<li class="nav-item"><a
-					href="StudentMenuController"
+				<li class="nav-item"><a href="StudentMenuController"
 					class="nav-link text-white"> <i class="bi bi-house"></i> Home
 				</a></li>
-				<li class="nav-item"><a
-					href="CollegeApplicationStudentController"
-					class="nav-link active" aria-current="page"> <i
-						class="bi bi-box-arrow-right"></i> Hostel Application
+				<li class="nav-item"><a href="CollegeApplicationStudentController"
+					class="nav-link text-white"> <i class="bi bi-box-arrow-right"></i>
+						Hostel Application
 				</a></li>
 				<li class="nav-item"><a href="AddComplaintStudentController"
 					class="nav-link text-white"> <i
 						class="bi bi-exclamation-square"></i> Complaint
 				</a></li>
 				<li class="nav-item"><a href="ManageProfileStudentController"
-					class="nav-link text-white"> <i class="bi bi-person-circle"></i>
-						Manage Profile
+					class="nav-link active" aria-current="page"> <i
+						class="bi bi-person-circle"></i> Manage Profile
 				</a></li>
 			</ul>
 			<hr>
@@ -89,43 +88,13 @@ if (session.getAttribute("currentSessionUser") == null)
 
 
 		<!--  Content -->
-		<div class="backg">
+		<div class="backg overflow-scroll">
 			<div class="card">
 				<div class="bg-soft-primary">
 					<div class="card-body">
-						<h4 class="card-title">HOSTEL APPLICATION</h4>
-						<!-- If no record for college application -->
-						<c:if test="${empty collegeApplication}">
-							<ul class="nav nav-pills navtab-bg nav-justified">
-								<li class="nav-item"><a
-									href="CollegeApplicationStudentController"
-									data-toggle="tab" aria-expanded="true" class="nav-link active"
-									style="border-radius: 15px;">APPLY</a></li>
-								<li class="nav-item"><a
-									href="#"
-									data-toggle="tab" aria-expanded="false" class="nav-link"
-									style="border-radius: 15px;">STATUS</a></li>
-							</ul>
-						</c:if>
-						<!-- If record for college application exist -->
-						<c:if test="${not empty collegeApplication}">
-							<ul class="nav nav-pills navtab-bg nav-justified">
-								<li class="nav-item"><a
-									href="CollegeApplicationStudentController"
-									data-toggle="tab" aria-expanded="true" class="nav-link active"
-									style="border-radius: 15px;">APPLY</a></li>
-								<li class="nav-item"><a
-									href="CollegeApplicationStatusStudentController"
-									data-toggle="tab" aria-expanded="false" class="nav-link"
-									style="border-radius: 15px;">STATUS</a></li>
-							</ul>
-						</c:if>
-
-
-						<!--  start div table   -->
-						<form
-							action="CollegeApplicationStudentController"
-							method="post">
+						<h4 class="card-title">MANAGE STUDENT PROFILE</h4>
+						<!--start div table   -->
+						<form action="ManageProfileStudentController?action=update_profile" method="post">
 							<div class="table-responsive mt-4">
 								<table class="table table-centered table-nowrap">
 									<tbody>
@@ -171,10 +140,18 @@ if (session.getAttribute("currentSessionUser") == null)
 										</tr>
 										<tr>
 											<td>
+												<p class="mb-0">STATE</p>
+											</td>
+											<td>
+												<h5 class="mb-0">${student.stu_state}</h5>
+											</td>
+										</tr>
+										<tr>
+											<td>
 												<p class="mb-0">PART</p>
 											</td>
 											<td>
-												<h5 class="mb-0">${student.stu_part}</h5>
+												<input type="number" name="stu_part" value="${student.stu_part}" style="padding: 0 5px; border-radius: 5px;" size="30"/>
 											</td>
 										</tr>
 										<tr>
@@ -182,7 +159,7 @@ if (session.getAttribute("currentSessionUser") == null)
 												<p class="mb-0">EMAIL</p>
 											</td>
 											<td>
-												<h5 class="mb-0">${student.stu_email}</h5>
+												<input type="email" name="stu_email" value="${student.stu_email}" style="padding: 0 5px; border-radius: 5px;" size="30"/>
 											</td>
 										</tr>
 										<tr>
@@ -190,78 +167,116 @@ if (session.getAttribute("currentSessionUser") == null)
 												<p class="mb-0">PHONE NO</p>
 											</td>
 											<td>
-												<h5 class="mb-0">${student.stu_phoneno}</h5>
+												<input type="text" name="stu_phoneno" value="${student.stu_phoneno}" style="padding: 0 5px; border-radius: 5px;" size="30"/>
 											</td>
 										</tr>
 										<tr>
 											<td>
-												<p class="mb-0">DATE</p>
+												<p class="mb-0">BLOOD TYPE</p>
 											</td>
 											<td>
-												<!-- <h5 class="mb-0" id="date"></h5> --> 
-												<input id="currentDate" type="date" name="collap_date" readonly />
+												<input type="text" name="stu_blood" value="${student.stu_blood}" style="padding: 0 5px; border-radius: 5px;" size="30"/>
 											</td>
 										</tr>
-										<!-- If no record for college application -->
-										<c:if test="${empty collegeApplication}">
-											<tr>
-												<td>
-													<p class="mb-0">SESSION</p>
-												</td>
-												<td><select name="collap_session"
-													style="padding: 0 50px; border-radius: 5px;" required>
-														<option value="SESSION 1 20/21">SESSION 1 20/21</option>
-														<option value="SESSION 2 20/21">SESSION 2 20/21</option>
-														<option value="SESSION 1 21/22">SESSION 1 21/22</option>
-														<option value="SESSION 2 21/22">SESSION 2 21/22</option>
-												</select></td>
-											</tr>
-											<tr>
-												<td>
-													<p class="mb-0">College Available
-														(Name-House-Room-Person)</p>
-												</td>
-												<td><select name="coll_no"
-													style="padding: 0 50px; border-radius: 5px;" required>
-														<c:forEach items="${college}" var="coll">
-															<option value="${coll.coll_no}">${coll.coll_no}</option>
-														</c:forEach>
-												</select></td>
-											</tr>
-											<tr align="center">
-												<td colspan="2">
-													<button type="submit" class="btn btn-primary"
-														style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">APPLY</button>
-													<button type="reset" class="btn btn-secondary"
-														style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">RESET</button>
-												</td>
-											</tr>
-										</c:if>
-										<c:if test="${not empty collegeApplication}">
-											<tr>
-												<td>
-													<p class="mb-0">HOSTEL APPLICATION STATUS</p>
-												</td>
-												<td>
-													<h5 class="mb-0">${collegeApplication.collap_status}</h5>
-												</td>
-											</tr>
-										</c:if>
+										
 									</tbody>
+									
 								</table>
+								<div
+								style="display: flex; justify-content: center; align-items: center;">
+								<button type="submit" class="btn btn-primary" style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;">SAVE</button>
+							</div>
+							</div>
+						</form>
+						<h4 class="card-title">CHANGE PASSWORD</h4>
+						<form action="ManageProfileStudentController?action=change_pass" method="post">
+							<table class="table table-centered table-nowrap">
+								<tbody>
+									<tr>
+										<td>
+											<p class="mb-0">CURRENT PASSWORD</p>
+										</td>
+										<td><input type="password" id="current_pass"
+											name="current_pass"
+											style="padding: 0 5px; border-radius: 5px;" size="30">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">ENTER NEW PASSWORD</p>
+										</td>
+										<td><input type="password" id="new_pass" name="new_pass"
+											style="padding: 0 5px; border-radius: 5px;" size="30"
+											onkeyup='check();'></td>
+									</tr>
+									<tr>
+										<td>
+											<p class="mb-0">RE-ENTER NEW PASSWORD</p>
+										</td>
+										<td><input type="password" id="confirm_pass"
+											name="confirm_pass"
+											style="padding: 0 5px; border-radius: 5px;" size="30"
+											onkeyup='check();'><br />
+										<br /> <input type="checkbox" onclick="showPass()">
+											Show Password</td>
+									</tr>
+								</tbody>
+							</table>
+							<div
+								style="display: flex; justify-content: center; align-items: center;">
+								<button id="sub" type="submit" class="btn btn-primary"
+									style="margin: 10px; padding: 5px 50px 5px 50px; border-radius: 10px;"
+									disabled>SUBMIT</button>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</main>
+
+
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="sidebars.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
-		//Date purpose
-		var date = new Date();
-		var currentDate = date.toISOString().slice(0, 10);
-		var currentTime = date.getHours() + ':' + date.getMinutes();
-		document.getElementById('currentDate').value = currentDate;
-	</script>
+      function showPass() {
+    	  var x = document.getElementById("current_pass");
+    	  var y = document.getElementById("new_pass");
+    	  var z = document.getElementById("confirm_pass");
+    	  if (x.type === "password") {
+    	    x.type = "text";
+    	  } 
+    	  else {
+    	    x.type = "password";
+    	  }
+
+    	  if (y.type === "password") {
+    	    y.type = "text";
+    	  } 
+    	  else {
+    	    y.type = "password";
+    	  }
+
+    	  if (z.type === "password") {
+    	    z.type = "text";
+    	  } 
+    	  else {
+    	    z.type = "password";
+    	  }
+    	}
+      
+      var check = function() {
+    	  if (document.getElementById('new_pass').value == document.getElementById('confirm_pass').value) {
+    	    document.getElementById("sub").disabled = false;
+    	  } 
+    	  else {
+    	    document.getElementById("sub").disabled = true;
+    	  }
+    	}
+      
+      </script>
 </body>
 </html>

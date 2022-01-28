@@ -15,7 +15,12 @@ Final Mini Project CSC584
       - Update (done)
       - Delete (done)
   - Manage Profile (ongoing)
-- Menu Staff (ongoing)
+- Menu Staff (done)
+  - List Student (done)
+  - List College
+  - List College Application
+  - List Complaint
+  - Generate Report
 
 #Bug Found
 - X
